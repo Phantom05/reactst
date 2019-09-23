@@ -190,6 +190,11 @@ function Mailbox(props){
   )
 }
 
+function WarningBanner(props){
+  if(!props.warn){
+    return null;
+  }
+}
 const messages = ['React','Re: React','Re:Re: React']
 function App() {
   return (
