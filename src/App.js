@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import StateTestMain from './Components/StateTestMain';
 
 
 function Avatar(props){
@@ -199,16 +200,17 @@ const messages = ['React','Re: React','Re:Re: React']
 function App() {
   return (
     <div className="App">
-      <Welcome name="Sara" />
+      {/* <Welcome name="Sara" />
       <Welcome name="Cahal" />
       <Welcome name="Edite" />
       <Clock />
-      <Toggle />
+      <Toggle /> */}
       {/* <button onClick={handleClick}>Activate Lasers</button> */}
       {/* <a href="#" onClick={handleClick}>Click me</a> */}
-    <Greeting isLoggedIn={true} />
+    {/* <Greeting isLoggedIn={true} />
      <LoginControl />
-      <Mailbox unreadMessage={messages} />
+      <Mailbox unreadMessage={messages} /> */}
+    <StateTestMain />
     </div>
   );
 }
