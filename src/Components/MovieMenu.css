@@ -1,0 +1,13 @@
+.MovieMenu{
+  min-height: 80vh;
+}
+.MovieMenuBox{
+  padding: 15px;
+  border: 1px solid red;
+}
+.MovieMenuList{
+  cursor: pointer;
+}
+.MovieMenuList:hover{
+  font-weight: bold;
+}

@@ -1,0 +1,30 @@
+.MovieHeader{
+  position: relative;
+  border-bottom: 1px solid #ececec;
+  height: 50px;
+}
+.headerBox{
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  width: 90%;
+}
+.headerBox:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+.headerBoxList{
+  float: left;
+  list-style: none;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.headerBoxList:last-child{
+  float: right;
+}
+
+.headerBoxList:hover{
+  color: orange;
+}
