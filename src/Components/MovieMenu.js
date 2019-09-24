@@ -37,6 +37,7 @@ class MovieMenu extends Component {
     }
     return (
       <div className="MovieMenu">
+       
         <ul className="MovieMenuBox">
           {menuList.map(list=>{
             return (

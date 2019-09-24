@@ -6,7 +6,7 @@ import '../../node_modules/antd/dist/antd.css';
 import './MovieIndex.css';
 import queryString from 'query-string';
 
-import { Route, Link } from 'react-router-dom';
+import { Route, Link ,withRouter} from 'react-router-dom';
 import MovieHeader from './MovieHeader';
 import MovieHome from './MovieHome';
 import Movie from './Movie';
@@ -16,6 +16,7 @@ import MovieFooter from './MovieFooter';
 import MovieMenu from './MovieMenu';
 import MovieBoard from './MovieBoard';
 
+const MovieHeaderComponent= withRouter(props => <MovieHeader {...props} />)
 class MovieIndex extends React.Component{
   state={
     date:null,
@@ -29,7 +30,7 @@ class MovieIndex extends React.Component{
         {/* {this.state.items? this._renderMovies(): 'Loading...'} */}
       <Row>
         <Col span={24}>
-          <MovieHeader />
+          <MovieHeaderComponent />
         </Col>
       </Row>
       <Row>

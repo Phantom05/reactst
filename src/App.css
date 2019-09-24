@@ -2,8 +2,15 @@
   text-align: center;
 } */
 
+
+body{
+  /* background: #2b2f3e !important; */
+  min-height: 100vh;
+  background: #26262d !important;
+}
 .App{
   position: relative;
+  
   /* min-height: 70vh; */
 }
 .App-logo {
