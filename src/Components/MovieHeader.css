@@ -26,5 +26,5 @@
 }
 
 .headerBoxList:hover{
-  color: orange;
+  text-decoration: underline;
 }
