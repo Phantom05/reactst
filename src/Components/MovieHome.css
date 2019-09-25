@@ -1,6 +1,6 @@
 .ant-carousel .slick-slide {
   text-align: center;
-  height: 160px;
+  height: 600px;
   line-height: 160px;
   background: #364d79;
   overflow: hidden;
@@ -9,3 +9,88 @@
 .ant-carousel .slick-slide h3 {
   color: #fff;
 }
+
+.custom_slide{
+  text-align: center;
+  height: 600px;
+  line-height: 160px;
+  background: #364d79;
+  overflow: hidden;
+}
+.catousel__box{
+  position: relative;
+  border-bottom: 1px solid rgba(211,215,219,.1);
+}
+/* 
+.catousel_dim{
+  background-image: linear-gradient(rgba(38, 38, 45, 0), rgb(38, 38, 45)), url(http://images.adrise.tv/9FUmvLnHDwq15BAdwGS7MWlOpLY=/0x94:2037x850/1920x676/smart/img.adrise.tv/9086aff4-8fd0-4535-a361-1e212b6998bb.jpg);
+} */
+
+.movie__home_control{
+  padding: 0 65px;
+}
+.movie__home_row{
+  border-bottom: 1px solid rgba(211,215,219,.1);
+  padding-bottom: 20px;
+}
+.movie__home_row_title_box{
+  position: relative;
+  padding: 25px 0 10px 0;
+}
+.movie__home_title_tx{
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+}
+.movie__home_title_more_box{
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top:50%;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.movie__poster_box_control:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.movie__poster_img_box{
+
+}
+.movie__poster_img{
+  width: 100%;
+  height: 285px;;
+}
+.movie__poster_box{
+  width: 210px;
+  float: left;
+  padding: 5px;
+}
+.movie__poster_info_box{
+
+}
+.movie__poster_info_tx{
+  display: block;
+  font-weight: bold;
+  color: #fff;
+  font-size: 15px;
+  padding: 15px 0;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+.movie__poster_info_tx:hover{
+  color: #ff501a;
+}
+.movie__poster_info_sub_tx{
+  color: hsla(0,0%,100%,.5);
+  font-size: 11px;
+  font-weight: bold;
+}
+

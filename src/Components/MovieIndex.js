@@ -30,7 +30,7 @@ class MovieIndex extends React.Component{
         {/* {this.state.items? this._renderMovies(): 'Loading...'} */}
       <Row>
         <Col span={24}>
-          <MovieHeaderComponent />
+          {/* <MovieHeaderComponent /> */}
         </Col>
       </Row>
       <Row>
