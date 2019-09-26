@@ -72,10 +72,7 @@ class MovieList extends Component {
                 )
               })}
             </div>
-
-
           </Col>
-
         </Row>
       </div>
     );
