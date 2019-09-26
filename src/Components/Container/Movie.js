@@ -1,22 +1,21 @@
-// import React, { Component } from 'react';
+import Header from './MovieHeader';
+import Home from './MovieHome';
+import About from './MovieAbout';
+import Login from './MovieLogin';
+import Footer from './MovieFooter';
+import Menu from './MovieMenu';
+import Board from './MovieBoard';
+import List from './MovieList';
+import Index from './MovieIndex';
 
-// import { DatePicker, message, Row, Col, Icon } from 'antd';
-// import { Route, Link } from 'react-router-dom';
-import Movie_Header from './MovieHeader';
-import Movie_Home from './MovieHome';
-import Movie_About from './MovieAbout';
-import Movie_Login from './MovieLogin';
-import Movie_Footer from './MovieFooter';
-import Movie_Menu from './MovieMenu';
-import Movie_Board from './MovieBoard';
-import Movie_List from './MovieList';
-
-export const MovieHeader = Movie_Header
-export const MovieHome = Movie_Home
-export const MovieAbout = Movie_About
-export const MovieLogin = Movie_Login
-export const MovieFooter = Movie_Footer
-export const MovieMenu = Movie_Menu
-export const MovieBoard = Movie_Board
-export const MovieList = Movie_List
-
+export {
+  Header,
+  Home,
+  About,
+  Login,
+  Footer,
+  Menu,
+  Board,
+  List,
+  Index
+}

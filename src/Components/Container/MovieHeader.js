@@ -28,7 +28,8 @@ class MovieHeader extends React.Component{
         id:4,
         title:`Login`,
         link:'/login',
-      }];
+      },
+    ];
 
       const activeStyle = {
         fontWeight:`bold`

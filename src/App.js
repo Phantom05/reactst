@@ -8,8 +8,39 @@ import '../node_modules/react-grid-layout/css/styles.css'
 import '../node_modules/react-resizable/css/styles.css'
 
 import {BrowserRouter, withRouter} from 'react-router-dom';
+import {MovieIndex,MovieList} from './Route/Main';
 
-import MovieIndex from './Components/Container/MovieIndex';
+const MovieComponent= withRouter(props => <MovieIndex {...props} />);
+
+function App() {
+  
+  // console.log(path,'ff');
+  return (
+    <BrowserRouter>
+    <div className="App">
+      {/* <Welcome name="Sara" />
+      <Welcome name="Cahal" />
+      <Welcome name="Edite" />
+      <Clock />
+      <Toggle /> */}
+      {/* <button onClick={handleClick}>Activate Lasers</button> */}
+      {/* <a href="#" onClick={handleClick}>Click me</a> */}
+    {/* <Greeting isLoggedIn={true} />
+     <LoginControl />
+      <Mailbox unreadMessage={messages} /> */}
+    {/* <StateTestMain />
+      <Mailbox unreadMessage={messages} />
+      <AxiosTest />
+      <ImageList imgArr={arr}/> */}
+      <MovieComponent />
+
+    </div>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+
 
 // function Avatar(props){
 //   return (
@@ -247,32 +278,3 @@ import MovieIndex from './Components/Container/MovieIndex';
 //   }
 // }
 // const messages = ['React','Re: React','Re:Re: React']
-const MovieComponent= withRouter(props => <MovieIndex {...props} />);
-
-function App() {
-  
-
-  return (
-    <BrowserRouter>
-    <div className="App">
-      {/* <Welcome name="Sara" />
-      <Welcome name="Cahal" />
-      <Welcome name="Edite" />
-      <Clock />
-      <Toggle /> */}
-      {/* <button onClick={handleClick}>Activate Lasers</button> */}
-      {/* <a href="#" onClick={handleClick}>Click me</a> */}
-    {/* <Greeting isLoggedIn={true} />
-     <LoginControl />
-      <Mailbox unreadMessage={messages} /> */}
-    {/* <StateTestMain />
-      <Mailbox unreadMessage={messages} />
-      <AxiosTest />
-      <ImageList imgArr={arr}/> */}
-      <MovieComponent />
-    </div>
-    </BrowserRouter>
-  );
-}
-
-export default App;

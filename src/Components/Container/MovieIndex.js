@@ -15,7 +15,11 @@ import {
   // , MovieMenu
   , MovieBoard
   , MovieList
-} from './Movie';
+} from './../../Route/Main';
+
+
+
+
 
 
 const MovieHeaderComponent = withRouter(props => <MovieHeader {...props} />)
