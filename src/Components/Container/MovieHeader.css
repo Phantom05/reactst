@@ -1,6 +1,10 @@
 .MovieHeader{
-  position: relative;
-  border-bottom: 1px solid #ececec;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 50000;
+  /* border-bottom: 1px solid #ececec; */
   height: 80px;
   background: #4c5264;
   transition: 1s;

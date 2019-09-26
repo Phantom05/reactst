@@ -1,0 +1,34 @@
+
+.movie__box_row:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+.movie__box{
+  float: left;
+  width: 200px;
+}
+.posterImage{
+  width: 100%;
+  height: 280px;
+}
+.movie__post_title{
+  color: #fff;
+  margin-top: 15px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  transition: .3s;
+}
+.movie__post_title:hover{
+  color: #ff501a;
+ 
+}
+.movie__post_sub_tx{
+  color: hsla(0,0%,100%,.5);
+  justify-content: space-between;
+  font-size: 11px;
+}
+.movie__box_row{
+  border-bottom: 1px solid rgba(211,215,219,.1);
+  padding-bottom: 2rem;
+}

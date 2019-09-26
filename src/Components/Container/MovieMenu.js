@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './MovieMenu.css';
-import { Route, Link,NavLink  } from 'react-router-dom';
+import { NavLink  } from 'react-router-dom';
 class MovieMenu extends Component {
    
   render() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MovieMenu from './MovieMenu';
-import { DatePicker, message, Row, Col, Icon } from 'antd';
-import { Route, Link } from 'react-router-dom';
+import { Row, Col } from 'antd';
+import { Route } from 'react-router-dom';
 import './Movie.css';
 
 
@@ -16,7 +16,7 @@ return(
 }
 
 
-class Movie extends Component {
+class MovieList extends Component {
   render() {
     const movieInfo = [
       {
@@ -82,4 +82,4 @@ class Movie extends Component {
   }
 }
 
-export default Movie;
+export default MovieList;

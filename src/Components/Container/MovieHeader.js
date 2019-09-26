@@ -1,7 +1,6 @@
 import React from 'react';
 import './MovieHeader.css';
-import { Route, Link,NavLink  } from 'react-router-dom';
-
+import { NavLink  } from 'react-router-dom';
 
 class MovieHeader extends React.Component{
   constructor(props){
@@ -34,10 +33,12 @@ class MovieHeader extends React.Component{
       const activeStyle = {
         fontWeight:`bold`
       }
-      const {pathname} = this.props.location;
+
+
+      const url = this.props.url;
 
     return(
-      <header className={(pathname === '/movie/all') ? 'MovieHeader movie': 'MovieHeader'}>
+      <header className={(url === '/movie/all' || url === '/') ? 'MovieHeader movie': 'MovieHeader'}>
          <span className="headermainLogo">
          <NavLink exact to="/">
          <img src="https://static.apiary.io/assets/1lqsC4I4.png" />
@@ -49,7 +50,7 @@ class MovieHeader extends React.Component{
             <div className="headermainLogoSubTitle">Enjoy Time •</div>
          </span>
          
-         <span className={(pathname === '/movie/all') ? 'support__header_info_box movie': 'support__header_info_box'}>
+         <span className={(this.props.url === '/movie/all') ? 'support__header_info_box movie': 'support__header_info_box'}>
           <div className="support__header_info_in_box">
             <div className="headermainLogoTitle">Sponsorship helps you run your site.</div>
             <div className="headermainLogoSubTitle">

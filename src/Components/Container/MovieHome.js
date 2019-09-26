@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Carousel, Icon } from 'antd';
 import './MovieHome.css';
-import Slider from "react-slick";
+// import Slider from "react-slick";
 // import axios from 'axios';
-
-
+// import {MovieList} from './Movie';
 
 class MoviePoster extends Component {
   constructor(props) {
@@ -35,6 +34,8 @@ class MoviePosterRow extends Component {
   }
 
   render() {
+    const count = Array(6).fill({})
+
     return (
       <div className="movie__home_row">
         <div className="movie__home_row_title_box">
@@ -45,13 +46,9 @@ class MoviePosterRow extends Component {
         </div>
 
         <div className="movie__poster_box_control">
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
-          <MoviePoster />
+          {count.map((list,i)=>{
+            return <MoviePoster key={i} /> 
+          })}
         </div>
       </div>
     )
@@ -110,10 +107,16 @@ class MovieHome extends Component {
     // .then((response)=>{
     //   console.log(response);
     // })
-    fetch(`https://picsum.photos/list`)
+    // fetch(`https://picsum.photos/list`)
+    // .then((response)=>{
+    //   console.log(response);
+    // })
+    fetch(`https://api.unsplash.com/phtos`)
     .then((response)=>{
       console.log(response);
     })
+
+    
 
     console.log(document.documentElement);
   }
@@ -128,6 +131,23 @@ class MovieHome extends Component {
 
   }
   render() {
+    let mainTitleArr = [
+      "Weekly Watchlist"
+      ,"Most Popular"
+      ,"Family Movies"
+      ,"Horror"
+      ,"Comedy"
+      ,"Documentary"
+      ,"Romance"
+      ,"Stand Up Comedy"
+      ,"Sci-fi - Fantasy"
+      ,"Foreign Language Films"
+      ,"Faith"
+      ,"Cult Classics"
+      ,"Thrillers"
+      ,"Sports Movies - Shows"
+      ,"Drama"
+    ]
     return (
       <div className="">
         <Carousel className="catousel__box" autoplay effect="fade" afterChange={(index) => {
@@ -142,21 +162,9 @@ class MovieHome extends Component {
           })}
         </Carousel>
         <div className="movie__home_control">
-          <MoviePosterRow title="Weekly Watchlist" />
-          <MoviePosterRow title="Most Popular" />
-          <MoviePosterRow title="Family Movies" />
-          <MoviePosterRow title="Horror" />
-          <MoviePosterRow title="Comedy" />
-          <MoviePosterRow title="Documentary" />
-          <MoviePosterRow title="Romance" />
-          <MoviePosterRow title="Stand Up Comedy" />
-          <MoviePosterRow title="Sci-fi - Fantasy" />
-          <MoviePosterRow title="Foreign Language Films" />
-          <MoviePosterRow title="Faith" />
-          <MoviePosterRow title="Cult Classics" />
-          <MoviePosterRow title="Thrillers" />
-          <MoviePosterRow title="Sports Movies - Shows" />
-          <MoviePosterRow title="Drama" />
+          {mainTitleArr.map((list, i) =>{
+            return <MoviePosterRow key={i} title={list} />
+          })}
         </div>
       </div>
     );
