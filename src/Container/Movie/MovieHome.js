@@ -28,16 +28,33 @@ class MoviePoster extends Component {
   }
 }
 
+
+// class TestButton extends Component{
+//   constructor(props){
+//     super(props);
+//   }
+//   render(){
+//     return(
+//       <div>
+//         <button onClick = {this.props.onClick}>버튼</button>
+//       </div>
+//     )
+//   }
+// }
 class MoviePosterRow extends Component {
   constructor(props) {
     super(props);
   }
 
+  // hello = (e) =>{
+  //   console.log('hello');
+  // }
   render() {
     const count = Array(6).fill({})
 
     return (
       <div className="movie__home_row">
+        {/* <TestButton onClick={this.hello} /> */}
         <div className="movie__home_row_title_box">
           <span className="movie__home_title_tx">{this.props.title}</span>
           <span className="movie__home_title_more_box">
@@ -147,25 +164,25 @@ class MovieHome extends Component {
       ,"Thrillers"
       ,"Sports Movies - Shows"
       ,"Drama"
-    ]
+    ];
+    const movieList = mainTitleArr.map((list, i) =>{
+      return <MoviePosterRow key={i} title={list} />
+    });
+    const slideList = this.state.slideList.map((list, i) => (
+        <div key={i} >
+          <h3 style={list.style} className="custom_slide"></h3>
+        </div>
+      )
+    )
     return (
       <div className="">
         <Carousel className="catousel__box" autoplay effect="fade" afterChange={(index) => {
           this.changeSliderIndex(index)
         }}>
-          {this.state.slideList.map((list, i) => {
-            return (
-              <div key={i} >
-                <h3 style={list.style} className="custom_slide"></h3>
-              </div>
-            )
-          })}
+        {slideList}
         </Carousel>
-        <div className="movie__home_control">
-          {mainTitleArr.map((list, i) =>{
-            return <MoviePosterRow key={i} title={list} />
-          })}
-        </div>
+
+        <div className="movie__home_control">{movieList}</div>
       </div>
     );
   }

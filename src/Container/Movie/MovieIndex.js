@@ -1,12 +1,8 @@
 import React,{Component} from 'react';
-// import axios from 'axios';
-// import GridLayout from 'react-grid-layout';
 import { Row, Col } from 'antd';
-
 import 'antd/dist/antd.css';
 import './MovieIndex.css';
-// import queryString from 'query-string';
-import { Route,  withRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import {
   MovieHeader
   , MovieHome
@@ -16,10 +12,12 @@ import {
   // , MovieMenu
   , MovieBoard
   , MovieList
+  ,PlainTemplate
 } from 'Route/Main';
 
+// import axios from 'axios';
+// import GridLayout from 'react-grid-layout';
 
-const MovieHeaderComponent = withRouter(props => <MovieHeader {...props} />)
 class MovieIndex extends Component {
   state = {
     date: null,
@@ -37,16 +35,8 @@ class MovieIndex extends Component {
   render() {
     const { pathname } = this.props.location;
     return (
-      <div>
-        {/* {this.state.items? this._renderMovies(): 'Loading...'} */}
+      <PlainTemplate header={<MovieHeader url={pathname}  />} size={'md'}>
         <Row>
-          <Col span={24}>
-            {/* <MovieHeaderComponent /> */}
-            <MovieHeader url={pathname}  />
-          </Col>
-        </Row>
-        <Row>
-        
           <Col span={24}>
             {/* Route는 깜빡이며 이동, Link는 바로이동 */}
             <Route exact path="/" component={MovieHome} />
@@ -61,7 +51,9 @@ class MovieIndex extends Component {
             <MovieFooter />
           </Col>
         </Row>
-      </div>
+      </PlainTemplate>
+
+
     )
   }
 }
