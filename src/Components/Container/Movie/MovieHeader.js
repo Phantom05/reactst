@@ -6,7 +6,17 @@ class MovieHeader extends React.Component{
   constructor(props){
     super(props);
   }
+  componentDidMount(){
+    console.log('did');
+  }
 
+  componentDidUpdate(){
+    console.log('update');
+  }
+
+  handleChange=(e)=>{
+    console.log('change');
+  }
 
   render(){
     let menuList = [
@@ -31,15 +41,14 @@ class MovieHeader extends React.Component{
       },
     ];
 
-      const activeStyle = {
-        fontWeight:`bold`
-      }
-
-
+      const activeStyle = { fontWeight:`bold`}
       const url = this.props.url;
 
     return(
-      <header className={(url === '/movie/all' || url === '/') ? 'MovieHeader movie': 'MovieHeader'}>
+      // <header className={(url === '/movie/all' || url === '/') ? 'MovieHeader movie': 'MovieHeader'}>
+      <header className={`MovieHeader ${(url === '/movie/all' || url === '/') ?"movie":""} `} >
+        
+        <div className=""></div>
          <span className="headermainLogo">
          <NavLink exact to="/">
          <img src="https://static.apiary.io/assets/1lqsC4I4.png" />

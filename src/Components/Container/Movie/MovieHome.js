@@ -111,10 +111,10 @@ class MovieHome extends Component {
     // .then((response)=>{
     //   console.log(response);
     // })
-    fetch(`https://api.unsplash.com/phtos`)
-    .then((response)=>{
-      console.log(response);
-    })
+    // fetch(`https://api.unsplash.com/phtos`)
+    // .then((response)=>{
+    //   console.log(response);
+    // })
 
     
 
