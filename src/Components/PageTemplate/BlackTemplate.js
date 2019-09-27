@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Wapper } from 'Style/Response/Response';
 
 const BlackTemplate = ({ children, header,size }) => {

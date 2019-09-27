@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MovieMenu from './MovieMenu';
 import { Row, Col } from 'antd';
 import { Route } from 'react-router-dom';
-import './Movie.css';
+import './MovieList.css';
 
 
 const MovieImg = (props) => {

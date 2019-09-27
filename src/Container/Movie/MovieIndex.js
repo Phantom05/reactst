@@ -4,16 +4,17 @@ import 'antd/dist/antd.css';
 import './MovieIndex.css';
 import { Route } from 'react-router-dom';
 import {
-  MovieHeader
-  , MovieHome
+   MovieHome
   , MovieAbout
   , MovieLogin
   , MovieFooter
   // , MovieMenu
   , MovieBoard
   , MovieList
-  ,PlainTemplate
+  ,PlainTemplate,
+  Header
 } from 'Route/Main';
+
 
 // import axios from 'axios';
 // import GridLayout from 'react-grid-layout';
@@ -35,7 +36,7 @@ class MovieIndex extends Component {
   render() {
     const { pathname } = this.props.location;
     return (
-      <PlainTemplate header={<MovieHeader url={pathname}  />} size={'md'}>
+      <PlainTemplate header={<Header url={pathname} trapUrl={['/', '/movie/all']} activeClass={'movie'}/>} size={'md'}>
         <Row>
           <Col span={24}>
             {/* Route는 깜빡이며 이동, Link는 바로이동 */}

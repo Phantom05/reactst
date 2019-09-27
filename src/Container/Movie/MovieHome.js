@@ -29,26 +29,13 @@ class MoviePoster extends Component {
 }
 
 
-// class TestButton extends Component{
-//   constructor(props){
-//     super(props);
-//   }
-//   render(){
-//     return(
-//       <div>
-//         <button onClick = {this.props.onClick}>버튼</button>
-//       </div>
-//     )
-//   }
-// }
+
 class MoviePosterRow extends Component {
   constructor(props) {
     super(props);
   }
 
-  // hello = (e) =>{
-  //   console.log('hello');
-  // }
+
   render() {
     const count = Array(6).fill({})
 

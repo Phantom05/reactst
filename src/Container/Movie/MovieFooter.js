@@ -4,9 +4,7 @@ import './MovieFooter.css'
 
 
 class FooterNav extends Component{
-  constructor(props){
-    super(props);
-  }
+
 
   render(){
     return(
