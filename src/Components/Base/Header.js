@@ -1,49 +1,82 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 // import { jsx, css } from '@emotion/core';
+import styled from '@emotion/styled';
 import _ from 'lodash';
+import { Icon } from 'antd';
+import SearchInput from "Components/Common/Form/SearchInput";
 
 // style
-import HeaderComponent from 'Style/Base/Header'
+import { HeaderComponent } from 'Style/Base/Header'
 
 
-class SearchInput extends Component{
-  constructor(props){
-    super(props)
-    this.state ={
-      searchInput:'',
-      placeholder:props.placeholder || ''
-    }
+const MainSearchInput = styled(SearchInput)`
+width:100%;
+border: none;
+height: 35px;
+font-size: 11px;
+outline: 0;
+border-radius: 40px;
+box-sizing: content-box;
+box-shadow: none;
+background: 0 0;
+color: #fff;
+text-align: center;
+letter-spacing: .5px;
+transition:  .2s ease-in-out,font-size .2s ease-in-out .1s;
+background: hsla(0,0%,100%,.5);
+padding-top: 2px;
+&:hover{
+  background: hsla(0,0%,100%,.3);
+}
+&::placeholder {
+color: #fff;
+transition:.3s ease-in-out .1s;;
+}
+&.on{
+  background: hsla(0,0%,100%,.3);
+  font-size: 13px;
+}
+${props => props.focusin && `  
+  background: hsla(0,0%,100%,.3);
+  font-size: 13px;`};
+`;
+
+
+const SearchFormStyled = styled.form`
+  position:absolute;
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  top:20px;
+  width:450px;
+`;
+const SearchIcon = ({ className }) => (<Icon type="search" className={className} />);
+const SearchFormIcon = styled(SearchIcon)`
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index:5;
+  color:white;
+  font-size:20px;
+`;
+class SearchForm extends Component {
+  constructor(props) {
+    super(props);
   }
+
   handleChange = (e) => {
-    console.log('change');
-    this.setState({
-      [e.target.name] : e.target.value
-    })
-  }
+    console.log('form handleChange ');
 
-  handleFocus = (e) =>{
-    console.log('handleFocus');
-    // this.onFocus()
-    this.setState({
-      placeholder:''
-    })
   }
-
-  handleBlur  = (e) =>{
-    console.log('blur');
-    
-    if(!this.state.searchInput.trim()){
-      this.setState({
-        searchInput:'',
-        placeholder:'Find movies, TV shows and more'
-      })  
-    }
-  }
-  render(){
-    const [props,state] = [this.props,this.state];
+  render() {
+    const [props, state] = [this.props, this.state]
     return (
-    <input type="text" className="header__main_search_input" onChange={this.handleChange} name="searchInput" value={state.searchInput} onFocus={this.handleFocus} onBlur={this.handleBlur} placeholder={props.placeholder} />
+      <SearchFormStyled action={props.action} method={props.method} onChange={this.handleChange}>
+        <SearchFormIcon />
+        <MainSearchInput name="hello" placeholder="Find movies, TV shows and more" autoComplete="off" />
+      </SearchFormStyled>
     )
   }
 }
@@ -60,9 +93,6 @@ class Header extends Component {
   componentDidUpdate() {
     console.log('update');
   }
-
-
-  
 
   render() {
 
@@ -93,7 +123,7 @@ class Header extends Component {
       },
     ];
 
-    const [props,state] = [this.props,this.state];
+    const [props, state] = [this.props, this.state];
     const activeStyle = { fontWeight: `bold` }
     const url = props.url;
 
@@ -104,10 +134,10 @@ class Header extends Component {
         </li>
       )
     });
-    
+
     let trap = _.flatten([props.trapUrl]).indexOf(url) !== -1
     return (
-      <HeaderComponent className={`MovieHeader ${trap && props.activeClass } `} >
+      <HeaderComponent className={`MovieHeader ${trap && props.activeClass} `} >
         <div className=""></div>
         <span className="header__main_Logo">
           <NavLink exact to="/">
@@ -120,7 +150,7 @@ class Header extends Component {
           <div className="header__main_Logo_Sub_Title">Enjoy Time •</div>
         </span>
 
-        <span className={`support__header_info_box ${ trap && props.activeClass }`}>
+        <span className={`support__header_info_box ${trap && props.activeClass}`}>
           <div className="support__header_info_in_box">
             <div className="header__main_Logo_Title">Sponsorship helps you run your site.</div>
             <div className="header__main_Logo_Sub_Title">
@@ -138,9 +168,7 @@ class Header extends Component {
         <ul className="headerBox">
           {NavList}
         </ul>
-        
-        <SearchInput placeholder="Find movies, TV shows and more"/>
-
+        <SearchForm action="/" method="get" />
       </HeaderComponent>
     );
   }

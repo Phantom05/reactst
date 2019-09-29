@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Header = styled.header`
+const HeaderComponent = styled.header`
 position: fixed;
 left: 0;
 top: 0;
@@ -125,11 +125,20 @@ padding-top: 2px;
 &::placeholder {
 color: #fff;
 }
-&.on{
+&.in{
   background: hsla(0,0%,100%,.3);
   font-size: 13px;
 }
 }
 `;
 
-export default Header;
+
+function Hello(props) {
+  console.log(props);
+}
+
+export {
+  HeaderComponent,
+  Hello
+
+};
