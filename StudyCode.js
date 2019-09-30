@@ -378,3 +378,10 @@ const ABC = styled.div`
   //     </div>
   //   )
   // }
+
+
+  let TestButtn = ({ className }) => (<button className={className}>
+    <span>Drama</span>
+  </button>);
+  let PlainButton = _boxButton(TestButtn)
+  <PlainButton theme='white' />

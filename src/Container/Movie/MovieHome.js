@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import {  Icon } from 'antd';
+import { Icon } from 'antd';
 import './MovieHome.css';
 
 import axios from 'axios';
 import styled from '@emotion/styled';
 
-import {SliderSlick} from 'Components/Module/SlickSlider'
-import {MoviePoster} from 'Route/Main';
+import { SliderSlick } from 'Components/Module/SlickSlider'
+import { MoviePoster } from 'Route/Main';
+import { _PlainButton, _genreButton, _boxButton, _gradeButton } from 'Route/Styled';
 
 class MoviePosterRow extends Component {
   constructor(props) {
     super(props);
   }
 
-  handleClick = (e) =>{
+  handleClick = (e) => {
     console.log('handleClick');
     console.log(this);
   }
@@ -28,8 +29,12 @@ class MoviePosterRow extends Component {
           </span>
         </div>
         <div className="movie__poster_box_control">
-          <SliderSlick config={{infinite:true}} list={props.movies && props.movies.map((info, i) => {
-            return <MoviePoster href={`/movie/detail/${info.id}`}  key={info.id} movieInfo={info}  onClick={this.handleClick}/>
+          <SliderSlick config={{ infinite: true }} list={props.movies && props.movies.map((info, i) => {
+            return <MoviePoster
+              link={`/movie/detail/${info.id}`}
+              key={info.id}
+              movieInfo={info}
+              onClick={this.handleClick} />
           })} />
         </div>
       </div>
@@ -50,7 +55,8 @@ class MovieHome extends Component {
 
   componentDidMount() {
     const getMainSlide = () => axios.get(`http://localhost:5000/movie/main/slide`);
-    const getMovieList1 = () => axios.get(`http://localhost:5000/movie`);
+    
+    const getMovieList1 = () => axios.get(`http://localhost:5000/movie?sort_by=download_count`);
     const getMovieList2 = () => axios.get(`http://localhost:5000/movie?sort_by=like_count`);
     const getMovieList3 = () => axios.get(`http://localhost:5000/movie?sort_by=rating'`);
     const getMovieList4 = () => axios.get(`http://localhost:5000/movie?genre=family`);
@@ -58,8 +64,8 @@ class MovieHome extends Component {
     const main = this;
     axios.all([getMainSlide(), getMovieList1(), getMovieList2(), getMovieList3(), getMovieList4()])
       .then(axios.spread(function (mainSlideList, week, populal, rating, genre) {
-        main.setState((prevState)=>({
-          slideList:prevState.slideList.concat(mainSlideList.data.data.movies)  
+        main.setState((prevState) => ({
+          slideList: prevState.slideList.concat(mainSlideList.data.data.movies)
         }))
         main.setState((prevState, prevProps) => ({
           movieList: prevState.movieList.concat(
@@ -105,12 +111,13 @@ class MovieHome extends Component {
 
     const Main = () => (
       <div>
-      <SliderSlick list={slideList} config={{
-        slidesToShow:1
-        ,slidesToScroll:1
-        ,dots:true
-        ,dots:true
-        ,infinite:true}}/>
+        <SliderSlick list={slideList} config={{
+          slidesToShow: 1
+          , slidesToScroll: 1
+          , dots: true
+          , dots: true
+          , infinite: true
+        }} />
 
         <div className="movie__home_control">{this.state.movieList ? movieList : 'Loading...'}</div>
       </div>
@@ -140,8 +147,8 @@ class MovieHome extends Component {
       <div>
         {this.state.movieList.length === 0
           ? <WhiteLoading>
-              <LoadingIconClass />
-            </WhiteLoading>
+            <LoadingIconClass />
+          </WhiteLoading>
           : <Main />}
       </div>
     );

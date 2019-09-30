@@ -7,7 +7,7 @@ import { Icon } from 'antd';
 import SearchInput from "Components/Common/Form/SearchInput";
 
 // style
-import { HeaderComponent } from 'Style/Base/Header'
+import { HeaderComponent } from 'Styles/Base/Header'
 
 
 const MainSearchInput = styled(SearchInput)`
