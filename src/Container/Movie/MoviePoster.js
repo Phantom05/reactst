@@ -11,7 +11,6 @@ class MoviePoster extends Component {
     const props = this.props;
     const { synopsis, year, title, medium_cover_image} = props.movieInfo;
 
-
     return (
       <div className="movie__poster_box" onClick={props.onClick}>
         <div className="movie__poster_img_box">
@@ -19,7 +18,7 @@ class MoviePoster extends Component {
         </div>
         <div className="movie__poster_info_box">
           <div>
-            <a  className="movie__poster_info_tx">{title}</a>
+            <a href={props.href} className="movie__poster_info_tx">{title}</a>
             <div className="movie__poster_info_sub_tx">({year}) {synopsis}</div>
           </div>
         </div>

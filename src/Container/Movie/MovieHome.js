@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { Carousel, Icon } from 'antd';
+import {  Icon } from 'antd';
 import './MovieHome.css';
 
 import axios from 'axios';
 import styled from '@emotion/styled';
-
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 import {SliderSlick} from 'Components/Module/SlickSlider'
 import {MoviePoster} from 'Route/Main';
@@ -33,7 +29,7 @@ class MoviePosterRow extends Component {
         </div>
         <div className="movie__poster_box_control">
           <SliderSlick config={{infinite:true}} list={props.movies && props.movies.map((info, i) => {
-            return <MoviePoster  key={info.id} movieInfo={info}  onClick={this.handleClick}/>
+            return <MoviePoster href={`/movie/detail/${info.id}`}  key={info.id} movieInfo={info}  onClick={this.handleClick}/>
           })} />
         </div>
       </div>
@@ -105,12 +101,10 @@ class MovieHome extends Component {
       </div>
     ));
 
+
+
     const Main = () => (
       <div>
-        {console.log(this.state.slideList ,'ggg')}
-
-
-
       <SliderSlick list={slideList} config={{
         slidesToShow:1
         ,slidesToScroll:1
@@ -143,7 +137,7 @@ class MovieHome extends Component {
     `;
 
     return (
-      <div className="">
+      <div>
         {this.state.movieList.length === 0
           ? <WhiteLoading>
               <LoadingIconClass />

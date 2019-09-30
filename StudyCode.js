@@ -334,3 +334,47 @@ const ABC = styled.div`
       <Mailbox unreadMessage={messages} />
       <AxiosTest />
       <ImageList imgArr={arr}/> */}
+
+
+
+
+
+
+
+
+
+
+      
+
+  // constructor(props){
+  //   super(props);
+  //   this.state={
+  //     error:null,
+  //     isLoaded:false,
+  //     // items:[]
+  //   }
+  // }
+
+  // componentDidMount(){
+  //   // `https://yts.tl/api/v2/list_movies.json?sort_by=rating`
+  //   // let apiAddress = `https://api.bithumb.com/public/ticker/BTC`
+  //   // apiAddress  = `https://www.themoviedb.org/discover/movie?sort_by=popularity.desc`
+  //   // const conf = {
+  //   //   method:`get`,
+  //   //   url:apiAddress
+  //   // }
+  //   // axios(conf).then((data)=>{
+  //   //   console.log(data);
+  //   // })
+  //   this.setState({
+  //     items:<img src="https://blogsimages.adobe.com/creativedialogue/files/2018/12/Adobe-Photoshop-Bestmoments2018-Blog-Tutorial-1-819x1024.jpg" />
+  //   })
+  // }
+
+  // _renderMovies = () =>{
+  //   return (
+  //     <div>
+  //       {this.state.items}
+  //     </div>
+  //   )
+  // }

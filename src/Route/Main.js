@@ -11,6 +11,8 @@ import _MovieBoard from 'Container/Movie/MovieBoard';
 import _MovieList from 'Container/Movie/MovieList';
 import _MovieIndex from 'Container/Movie/MovieIndex';
 import _MoviePoster from 'Container/Movie/MoviePoster';
+import _MovieDetail from 'Container/Movie/MovieDetail';
+
 
 // Drama
 import _DramaHome from 'Container/Drama/DramaHome'
@@ -34,6 +36,7 @@ export const MovieMenu   = _MovieMenu;
 export const MovieBoard  = _MovieBoard;
 export const MovieList   = _MovieList;
 export const MoviePoster = _MoviePoster;
+export const MovieDetail = _MovieDetail;
 
 export const DramaHome = _DramaHome;
 
