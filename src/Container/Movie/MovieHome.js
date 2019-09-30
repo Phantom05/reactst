@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
+import { Link } from 'react-router-dom';
 import './MovieHome.css';
 
 import axios from 'axios';
@@ -29,18 +30,31 @@ class MoviePosterRow extends Component {
           </span>
         </div>
         <div className="movie__poster_box_control">
-          <SliderSlick config={{ infinite: true }} list={props.movies && props.movies.map((info, i) => {
+          <SliderSlick config={{
+                slidesToShow: 7
+                , slidesToScroll: 7
+                , dots: true
+                // , variableWidth:true
+                , infinite: true
+              }}
+              list={props.movies && props.movies.map((info, i) => {
             return <MoviePoster
               link={`/movie/detail/${info.id}`}
               key={info.id}
               movieInfo={info}
-              onClick={this.handleClick} />
+              onClick={this.handleClick} 
+              
+              />
           })} />
         </div>
       </div>
     )
   }
 }
+
+const MainSlideBox = styled.div`
+position:relative;
+`
 
 class MovieHome extends Component {
   constructor(props) {
@@ -98,27 +112,42 @@ class MovieHome extends Component {
   render() {
     const props = this.props;
     const movieList = this.state.movieList.map((list, i) => {
-      return <MoviePosterRow key={i} category={list.category} movies={list.movies} />
+      return <MoviePosterRow 
+      key={i} 
+      category={list.category} 
+      movies={list.movies} 
+      />
     });
 
     const slideList = this.state.slideList.map((list, i) => (
-      <div key={i} >
+      <Link to={list.link} key={i}  className="custom_slide__box">
+        <h2 className="custom_slide__title">{list.title}</h2>
+        <h2 className="custom_slide__summary">{list.summary}</h2>
         <h3 style={list.style} className="custom_slide"></h3>
-      </div>
+      </Link>
     ));
+
 
 
 
     const Main = () => (
       <div>
-        <SliderSlick list={slideList} config={{
-          slidesToShow: 1
-          , slidesToScroll: 1
-          , dots: true
-          , dots: true
-          , infinite: true
-        }} />
-
+        <MainSlideBox >
+        <Link to="/" className="main__watch_btn">
+          <span className="main__watch_btn_tx">Watch Now
+            <span className="main__watch_btn_tx_free">FREE</span>
+          </span>
+        </Link>
+          <SliderSlick list={slideList} config={{
+            slidesToShow: 1
+            , slidesToScroll: 1
+            , dots: true
+            , infinite: true
+            , fade: true,
+            responsive:false
+          }} />
+        </MainSlideBox>
+      
         <div className="movie__home_control">{this.state.movieList ? movieList : 'Loading...'}</div>
       </div>
     );

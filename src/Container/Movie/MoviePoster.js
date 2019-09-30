@@ -11,23 +11,23 @@ const Poster = styled.div`
   clear: both;
 }
 
+.movie__poster_box {
+  display: block;
+  /* width: 280px; */
+  float: left;
+  padding: 8px;
+  transition: .3s;
+  cursor: pointer;
+}
+
 .movie__poster_img {
   width: 100%;
-  height: 285px;
+  /* height: 385px; */
 }
 
 .movie__poster_img_box{
   position:relative;
   overflow:hidden;
-}
-
-.movie__poster_box {
-  display: block;
-  width: 210px;
-  float: left;
-  padding: 8px;
-  transition: .5s;
-  cursor: pointer;
 }
 
 .movie__play_btn{ 
@@ -38,11 +38,10 @@ const Poster = styled.div`
   transform:translate(-50%,-50%) scale(0.8);
   border-radius:100%;
   color:#fff;
-  font-size:35px;
-  transition:.5s;
+  font-size:60px;
+  transition:.3s;
   &:hover{
     color:#ff501a;
-    font-size:32px;
     transform:translate(-50%,-50%) scale(0.9);
   }
 }
@@ -53,7 +52,7 @@ const Poster = styled.div`
   width:100%;
   height:100%;
   background:rgba(0,0,0,.5);
-  transition:.5s;
+  transition:.3s;
   opacity:0;
   z-index:10;
 }
@@ -83,8 +82,7 @@ const Poster = styled.div`
   height: 40px;
   background:rgba(0,0,0,.5);
   color:#fff;
-  transition:.5s;
-  /* opacity:0; */
+  transition:.3s;
   text-align:center;
   font-size:12px;
   line-height:40px;
@@ -106,7 +104,7 @@ const Poster = styled.div`
   display: block;
   font-weight: bold;
   color: #fff;
-  font-size: 15px;
+  font-size: 18px;
   padding: 15px 0;
   padding-bottom: 20px;
   cursor: pointer;
@@ -122,7 +120,20 @@ const Poster = styled.div`
   font-weight: bold;
   height: 50px;
   overflow: hidden;
-}`;
+}
+@media screen and (max-width:800px){
+  .movie__poster_info_sub_tx{
+    display:none;
+  }
+  .movie__poster_info_tx{
+    font-size:14px;
+
+  }
+  .movie__poster_img_sumnail{
+    display:none;
+  }
+}
+`;
 
 
 class MoviePoster extends Component {

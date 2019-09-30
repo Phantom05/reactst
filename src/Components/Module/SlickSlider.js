@@ -28,7 +28,7 @@ const SlickPrevArrow = styled(SamplePrevArrow)`
   height:40px;
   transform:translateY(-50%);
   left:10px;
-  border:1px solid blue;
+  /* border:1px solid blue; */
   padding:10px;
   z-index:50;
 `;
@@ -40,7 +40,7 @@ const SlickNextArrow = styled(SampleNextArrow)`
   height:40px;
   transform:translateY(-50%);
   right:10px;
-  border:1px solid red;
+  /* border:1px solid red; */
   padding:10px;
 `;
 
@@ -57,11 +57,71 @@ class SliderSlick extends Component {
       slidesToScroll: props.config && props.config.slidesToScroll || 6,
       variableWidth: props.config && props.config.variableWidth || false,
       dots:props.config && props.config.dots || false,
-      infinite :props.config && props.config.infinite || false
+      infinite :props.config && props.config.infinite || false,
+      fade :props.config && props.config.fade || false,
+      responsive :props.config && props.config.responsive || false
     }
-
-    var settings = {
+    
+    let responsiveSetting = [
+      {
+        breakpoint: 1900,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 6,
+          infinite: true,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 5,
+          infinite: true,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 4,
+          infinite: true,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          initialSlide: 0,
+        }
+      },
+      {
+        breakpoint: 840,
+        settings: {
+          dots:false,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          dots:false,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+        }
+      }
+    ]
+    // console.log(config.fade);
+    let settings = {
       dots: config.dots,
+      // fade:config.fade,
       infinite: config.infinite,
       speed: config.speed,
       slidesToShow: config.slidesToShow,
@@ -71,46 +131,7 @@ class SliderSlick extends Component {
       variableWidth: config.variableWidth,
       beforeChange: (current, next) => this.setState({ activeSlide: next }),
       afterChange: current => this.setState({ activeSlide2: current }),
-      responsive: [
-        {
-          breakpoint: 1400,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true,
-            variableWidth: true,
-            initialSlide: 0,
-          }
-        },
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 4,
-            slidesToScroll: 4,
-            infinite: true,
-            variableWidth: true,
-            initialSlide: 0,
-          }
-        },
-        {
-          breakpoint: 600,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            infinite: true,
-            variableWidth: true,
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: true,
-            variableWidth: true,
-          }
-        }
-      ],
+      responsive: config.responsive && responsiveSetting,
       nextArrow: <SlickNextArrow />,
       prevArrow: <SlickPrevArrow />
     };
@@ -128,23 +149,6 @@ class SliderSlick extends Component {
     )
   }
 };
-
-const StyleSlickSlider = styled(SliderSlick)`
-  background:white;
-  height:150px;
-  width:95%;
-  margin:auto;
-`;
-
-class SlickSlider extends Component {
-  render() {
-    return (
-      <div>
-        <StyleSlickSlider />
-      </div>
-    );
-  }
-}
 
 export {
   SliderSlick
