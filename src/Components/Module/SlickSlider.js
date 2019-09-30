@@ -7,49 +7,89 @@ import "slick-carousel/slick/slick-theme.css";
 // import {MovieList} from './Movie';
 
 
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "red" }}
-      onClick={onClick}
-    />
-  );
-}
-
 function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
   return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-      onClick={onClick}
-    />
+    <div className={className} onClick={onClick} />
   );
-}
+};
+function SampleNextArrow(props) {
+  const { className, onClick } = props;
+  return (
+    <div className={className} onClick={onClick} />
+  );
+};
+
+const SlickPrevArrow = styled(SamplePrevArrow)`
+  display:inline-block;
+  position:absolute;
+  top:50%;
+  width:40px;
+  height:40px;
+  transform:translateY(-50%);
+  left:10px;
+  border:1px solid blue;
+  padding:10px;
+  z-index:50;
+`;
+const SlickNextArrow = styled(SampleNextArrow)`
+  display:inline-block;
+  position:absolute;
+  top:50%;
+  width:40px;
+  height:40px;
+  transform:translateY(-50%);
+  right:10px;
+  border:1px solid red;
+  padding:10px;
+`;
+
 
 class SliderSlick extends Component {
   constructor(props) {
     super(props);
   }
-
   render() {
+    const props = this.props;
+    let config = {
+      speed : props.config && props.config.speed || 500,
+      slidesToShow: props.config && props.config.slidesToShow || 6,
+      slidesToScroll: props.config && props.config.slidesToScroll || 6,
+      variableWidth: props.config && props.config.variableWidth || false,
+      dots:props.config && props.config.dots || false,
+      infinite :props.config && props.config.infinite || false
+    }
+
     var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4,
+      dots: config.dots,
+      infinite: config.infinite,
+      speed: config.speed,
+      slidesToShow: config.slidesToShow,
+      slidesToScroll: config.slidesToScroll,
       initialSlide: 0,
+      // lazyLoad: true,
+      variableWidth: config.variableWidth,
+      beforeChange: (current, next) => this.setState({ activeSlide: next }),
+      afterChange: current => this.setState({ activeSlide2: current }),
       responsive: [
+        {
+          breakpoint: 1400,
+          settings: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            infinite: true,
+            variableWidth: true,
+            initialSlide: 0,
+          }
+        },
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToShow: 4,
+            slidesToScroll: 4,
             infinite: true,
-            dots: true
+            variableWidth: true,
+            initialSlide: 0,
           }
         },
         {
@@ -57,29 +97,29 @@ class SliderSlick extends Component {
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            initialSlide: 2
+            infinite: true,
+            variableWidth: true,
           }
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            infinite: true,
+            variableWidth: true,
           }
         }
       ],
-      nextArrow: <SampleNextArrow />,
-      prevArrow: <SamplePrevArrow />
+      nextArrow: <SlickNextArrow />,
+      prevArrow: <SlickPrevArrow />
     };
-    const props = this.props;
-    const posterArr = Array(10).fill(true);
-    const posterRow = posterArr.map((list, idx) => (
-      <div>
-        <div>{idx}</div>
-        <img src="http://file.thisisgame.com/upload/tboard/user/2016/07/08/20160708061954_5657.jpg" alt="" />
+
+    const posterRow = props.list && props.list.map((list, idx) => (
+      <div key={list.key}>
+        {list}
       </div>
     ))
-
 
     return (
       <Slider {...settings} className={props.className}>
@@ -96,8 +136,6 @@ const StyleSlickSlider = styled(SliderSlick)`
   margin:auto;
 `;
 
-
-
 class SlickSlider extends Component {
   render() {
     return (
@@ -108,4 +146,6 @@ class SlickSlider extends Component {
   }
 }
 
-export default SlickSlider;
+export {
+  SliderSlick
+};
