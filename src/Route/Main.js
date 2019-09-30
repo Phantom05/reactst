@@ -10,6 +10,7 @@ import _MovieMenu from 'Container/Movie/MovieMenu';
 import _MovieBoard from 'Container/Movie/MovieBoard';
 import _MovieList from 'Container/Movie/MovieList';
 import _MovieIndex from 'Container/Movie/MovieIndex';
+import _MoviePoster from 'Container/Movie/MoviePoster';
 
 // Drama
 import _DramaHome from 'Container/Drama/DramaHome'
@@ -24,14 +25,15 @@ import _Header from 'Components/Base/Header';
 
 
 
-export const MovieIndex = _MovieIndex;
-export const MovieHome = _MovieHome;
-export const MovieAbout = _MovieAbout;
-export const MovieLogin = _MovieLogin;
+export const MovieIndex  = _MovieIndex;
+export const MovieHome   = _MovieHome;
+export const MovieAbout  = _MovieAbout;
+export const MovieLogin  = _MovieLogin;
 export const MovieFooter = _MovieFooter;
-export const MovieMenu = _MovieMenu;
-export const MovieBoard = _MovieBoard;
-export const MovieList = _MovieList;
+export const MovieMenu   = _MovieMenu;
+export const MovieBoard  = _MovieBoard;
+export const MovieList   = _MovieList;
+export const MoviePoster = _MoviePoster;
 
 export const DramaHome = _DramaHome;
 
