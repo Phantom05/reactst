@@ -75,7 +75,8 @@ class MovieHome extends Component {
       sliderLink: null,
       slideList: [],
       movieList: [],
-      isLoading:true
+      isLoading:true,
+      scrollIdx:3
     }
   }
 
@@ -139,23 +140,32 @@ class MovieHome extends Component {
       console.log("Almost Bottom Of This Browser");
 
       // if (!this.props.isLoading && !this.props.isLast) {
-        if (!this.props.isLoading ) {
-          this.setState((prevState) =>({
-            isLoading:false
-          }))
-          
-          axios.get(`http://localhost:5000/movie?sort_by=download_count`)
-          .then((val) =>{
-            main.setState((prevState, prevProps) => ({
-              movieList: prevState.movieList.concat(
-                [{
-                  category: 'Weekly Watchlist',
-                  movies: val.data.data.movies
-                }]),
-                isLoading:true
-            }));
-          })
-      }
+        console.log(mainTitleArr.length );
+        console.log(this.state.scrollIdx);
+        if(mainTitleArr.length > this.state.scrollIdx){
+          console.log('scroll');
+          if (!this.props.isLoading ) {
+            this.setState((prevState) =>({
+              isLoading:false,
+              scrollIdx:prevState.scrollIdx +1
+            }))
+  
+            axios.get(`http://localhost:5000/movie?sort_by=download_count&page=${main.state.scrollIdx}`)
+            .then((val) =>{
+              main.setState((prevState, prevProps) => ({
+                movieList: prevState.movieList.concat(
+                  [{
+                    category: 'Weekly Watchlist',
+                    movies: val.data.data.movies
+                  }]),
+                  isLoading:true
+              }));
+            })
+        }
+        }else{
+          console.log('end');
+        }
+
 
 
 
