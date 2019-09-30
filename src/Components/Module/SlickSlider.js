@@ -51,15 +51,19 @@ class SliderSlick extends Component {
   }
   render() {
     const props = this.props;
+
     let config = {
-      speed : props.config && props.config.speed || 500,
-      slidesToShow: props.config && props.config.slidesToShow || 6,
-      slidesToScroll: props.config && props.config.slidesToScroll || 6,
-      variableWidth: props.config && props.config.variableWidth || false,
-      dots:props.config && props.config.dots || false,
-      infinite :props.config && props.config.infinite || false,
-      fade :props.config && props.config.fade || false,
-      responsive :props.config && props.config.responsive || false
+      speed          : props.config && props.config.speed || 500,
+      slidesToShow   : props.config && props.config.slidesToShow || 6,
+      slidesToScroll : props.config && props.config.slidesToScroll || 6,
+      variableWidth  : props.config && props.config.variableWidth || false,
+      dots           : props.config && props.config.dots || false,
+      infinite       : props.config && props.config.infinite || false,
+      fade           : props.config && props.config.fade || false,
+      responsive     : props.config && props.config.responsive || false,
+      autoplay       : props.config && props.config.autoplay || false,
+      autoplaySpeed  : props.config && props.config.autoplaySpeed || false,
+      
     }
     
     let responsiveSetting = [
@@ -120,20 +124,22 @@ class SliderSlick extends Component {
     ]
     // console.log(config.fade);
     let settings = {
-      dots: config.dots,
-      // fade:config.fade,
-      infinite: config.infinite,
-      speed: config.speed,
-      slidesToShow: config.slidesToShow,
-      slidesToScroll: config.slidesToScroll,
-      initialSlide: 0,
-      // lazyLoad: true,
-      variableWidth: config.variableWidth,
-      beforeChange: (current, next) => this.setState({ activeSlide: next }),
-      afterChange: current => this.setState({ activeSlide2: current }),
-      responsive: config.responsive && responsiveSetting,
-      nextArrow: <SlickNextArrow />,
-      prevArrow: <SlickPrevArrow />
+      dots           : config.dots,
+      // fade           : config.fade,
+      autoplay       : props.autoplay ,
+      autoplaySpeed  : props.autoplaySpeed ,
+      infinite       : config.infinite,
+      speed          : config.speed,
+      slidesToShow   : config.slidesToShow,
+      slidesToScroll : config.slidesToScroll,
+      initialSlide   : 0,
+      // lazyLoad    : true,
+      variableWidth  : config.variableWidth,
+      beforeChange   : (current, next) => this.setState({ activeSlide: next }),
+      afterChange    : current => this.setState({ activeSlide2: current }),
+      responsive     : config.responsive && responsiveSetting,
+      nextArrow      : <SlickNextArrow />,
+      prevArrow      : <SlickPrevArrow />
     };
 
     const posterRow = props.list && props.list.map((list, idx) => (

@@ -10,14 +10,27 @@ import { SliderSlick } from 'Components/Module/SlickSlider'
 import { MoviePoster } from 'Route/Main';
 import { _PlainButton, _genreButton, _boxButton, _gradeButton } from 'Route/Styled';
 
+let mainTitleArr = [
+  "Weekly Watchlist"
+  , "Most Popular"
+  , "Family Movies"
+  , "Horror"
+  , "Comedy"
+  , "Documentary"
+  , "Romance"
+  , "Stand Up Comedy"
+  , "Sci-fi - Fantasy"
+  , "Foreign Language Films"
+  , "Faith"
+  , "Cult Classics"
+  , "Thrillers"
+  , "Sports Movies - Shows"
+  , "Drama"
+];
+
 class MoviePosterRow extends Component {
   constructor(props) {
     super(props);
-  }
-
-  handleClick = (e) => {
-    console.log('handleClick');
-    console.log(this);
   }
   render() {
     const props = this.props;
@@ -33,8 +46,6 @@ class MoviePosterRow extends Component {
           <SliderSlick config={{
                 slidesToShow: 7
                 , slidesToScroll: 7
-                , dots: true
-                // , variableWidth:true
                 , infinite: true
               }}
               list={props.movies && props.movies.map((info, i) => {
@@ -63,13 +74,19 @@ class MovieHome extends Component {
       sliderIndex: 0,
       sliderLink: null,
       slideList: [],
-      movieList: []
+      movieList: [],
+      isLoading:true
     }
   }
 
+  componentWillUnmount() {
+    // 언마운트 될때에, 스크롤링 이벤트 제거
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
   componentDidMount() {
+    // 초반 데이터 받아오는 부분
     const getMainSlide = () => axios.get(`http://localhost:5000/movie/main/slide`);
-    
     const getMovieList1 = () => axios.get(`http://localhost:5000/movie?sort_by=download_count`);
     const getMovieList2 = () => axios.get(`http://localhost:5000/movie?sort_by=like_count`);
     const getMovieList3 = () => axios.get(`http://localhost:5000/movie?sort_by=rating'`);
@@ -101,8 +118,50 @@ class MovieHome extends Component {
         }));
 
       }));
+
+
+
+      // 스크롤 이벤트
+      window.addEventListener("scroll", this.handleScroll);
   }
 
+  handleScroll = () => {
+    // mainTitleArr.length;
+    const main = this;
+    const { innerHeight } = window;
+    const { scrollHeight } = document.body;
+    // IE에서는 document.documentElement 를 사용.
+    const scrollTop =
+      (document.documentElement && document.documentElement.scrollTop) ||
+      document.body.scrollTop;
+    // 스크롤링 했을때, 브라우저의 가장 밑에서 100정도 높이가 남았을때에 실행하기위함.
+    if (scrollHeight - innerHeight - scrollTop < 100) {
+      console.log("Almost Bottom Of This Browser");
+
+      // if (!this.props.isLoading && !this.props.isLast) {
+        if (!this.props.isLoading ) {
+          this.setState((prevState) =>({
+            isLoading:false
+          }))
+          
+          axios.get(`http://localhost:5000/movie?sort_by=download_count`)
+          .then((val) =>{
+            main.setState((prevState, prevProps) => ({
+              movieList: prevState.movieList.concat(
+                [{
+                  category: 'Weekly Watchlist',
+                  movies: val.data.data.movies
+                }]),
+                isLoading:true
+            }));
+          })
+      }
+
+
+
+    }
+
+  }
   changeSliderIndex = (index) => {
     // this.setState({
     //   sliderLink: this.state.slideList[index].link
@@ -127,9 +186,6 @@ class MovieHome extends Component {
       </Link>
     ));
 
-
-
-
     const Main = () => (
       <div>
         <MainSlideBox >
@@ -141,10 +197,12 @@ class MovieHome extends Component {
           <SliderSlick list={slideList} config={{
             slidesToShow: 1
             , slidesToScroll: 1
-            , dots: true
+            , dots: false
             , infinite: true
-            , fade: true,
-            responsive:false
+            , fade: true
+            , responsive:false
+            , autoplay: true
+            , autoplaySpeed: 1000
           }} />
         </MainSlideBox>
       
@@ -171,6 +229,7 @@ class MovieHome extends Component {
       font-size:30px;
       color:#fff;
     `;
+    
 
     return (
       <div>
@@ -186,20 +245,3 @@ class MovieHome extends Component {
 
 export default MovieHome;
 
-let mainTitleArr = [
-  "Weekly Watchlist"
-  , "Most Popular"
-  , "Family Movies"
-  , "Horror"
-  , "Comedy"
-  , "Documentary"
-  , "Romance"
-  , "Stand Up Comedy"
-  , "Sci-fi - Fantasy"
-  , "Foreign Language Films"
-  , "Faith"
-  , "Cult Classics"
-  , "Thrillers"
-  , "Sports Movies - Shows"
-  , "Drama"
-];
