@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon } from 'antd';
+// import { Icon } from 'antd';
 import axios from 'axios';
 import styled from '@emotion/styled';
 
@@ -34,10 +34,11 @@ class MovieDetail extends Component {
   render() {
     const [props,state] = [this.props,this.state];
     console.log(this.state.movieInfo);
+    console.log(props);
     return (
       <Main>
-        <h1>{state.movieInfo.title}</h1>
-        <img src={`https://yts.tl/${state.movieInfo.large_cover_image}`}></img>
+        <h1>{state.movieInfo && state.movieInfo.title}</h1>
+        <img src={`https://yts.tl/${state.movieInfo && state.movieInfo.large_cover_image}`} alt="test"></img>
       </Main>
     );
   }

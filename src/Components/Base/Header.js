@@ -62,16 +62,17 @@ const SearchFormIcon = styled(SearchIcon)`
   font-size:20px;
 `;
 class SearchForm extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   handleChange = (e) => {
     console.log('form handleChange ');
 
   }
   render() {
-    const [props, state] = [this.props, this.state]
+    const [props] = [this.props];
+    
     return (
       <SearchFormStyled action={props.action} method={props.method} onChange={this.handleChange}>
         <SearchFormIcon />
@@ -82,10 +83,9 @@ class SearchForm extends Component {
 }
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   componentDidMount() {
     console.log('did');
   }
@@ -123,7 +123,7 @@ class Header extends Component {
       },
     ];
 
-    const [props, state] = [this.props, this.state];
+    const [props] = [this.props];
     const activeStyle = { fontWeight: `bold` }
     const url = props.url;
 
@@ -141,7 +141,7 @@ class Header extends Component {
         <div className=""></div>
         <span className="header__main_Logo">
           <NavLink exact to="/">
-            <img src="https://static.apiary.io/assets/1lqsC4I4.png" />
+            <img src="https://static.apiary.io/assets/1lqsC4I4.png" alt="test"/>
           </NavLink >
 
         </span>

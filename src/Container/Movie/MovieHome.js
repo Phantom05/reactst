@@ -5,31 +5,16 @@ import './MovieHome.css';
 
 import axios from 'axios';
 import styled from '@emotion/styled';
+import {  keyframes } from '@emotion/core'
+import debounce from 'lodash/debounce';
 
 import { SliderSlick } from 'Components/Module/SlickSlider'
 import { MoviePoster } from 'Route/Main';
-import { _PlainButton, _genreButton, _boxButton, _gradeButton } from 'Route/Styled';
+import {MainMovieListArr} from 'Route/Common';
+// import { _PlainButton, _genreButton, _boxButton, _gradeButton } from 'Route/Styled';
 
 // api
-import {GetSlideData}  from 'Api/Api';
-
-let mainTitleArr = [
-  "Weekly Watchlist"
-  , "Most Popular"
-  , "Family Movies"
-  , "Horror"
-  , "Comedy"
-  , "Documentary"
-  , "Romance"
-  , "Stand Up Comedy"
-  , "Sci-fi - Fantasy"
-  , "Foreign Language Films"
-  , "Faith"
-  , "Cult Classics"
-  , "Thrillers"
-  , "Sports Movies - Shows"
-  , "Drama"
-];
+import {GetSlideData,getMovieListData}  from 'Api/Api';
 
 const WhiteLoading = styled.div`
 position:fixed;
@@ -50,14 +35,26 @@ transform:translate(-50%,-50%);
 font-size:30px;
 color:#fff;
 `;
-
 const MainSlideBox = styled.div`
 position:relative;
+`
+const rowKeyframe = keyframes`
+  0% {
+    opacity:0
+  }
+
+  100% {
+    opacity:1
+  }
+`;
+const MoviePosterRowStyle = styled.div`
+   /* animation: ${rowKeyframe} 1s ease forwards; */
 `
 
 class MoviePosterRow extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   render() {
     const props = this.props;
@@ -69,27 +66,30 @@ class MoviePosterRow extends Component {
             <Icon type="ellipsis" />
           </span>
         </div>
-        <div className="movie__poster_box_control">
+        <MoviePosterRowStyle>
           <SliderSlick config={{
-                slidesToShow: 7
-                , slidesToScroll: 7
-                , infinite: true
-              }}
-              list={props.movies && props.movies.map((info, i) => {
-            return <MoviePoster
-              link={`/movie/detail/${info.id}`}
-              key={info.id}
-              movieInfo={info}
-              onClick={this.handleClick} 
-              
-              />
-          })} />
-        </div>
+            slidesToShow: 7
+            , slidesToScroll: 7
+            , infinite: true
+          }}
+            list={props.movies && props.movies.map((info, i) => (
+              <MoviePoster
+                link={`/movie/detail/${info.id}`}
+                key={info.id}
+                movieInfo={info}
+                onClick={this.handleClick}
+                onMouseOver={this.onDebounceHandle}
+                // videoInfo 는 서버에 데이터를 추가할 예정입니다.
+                videoInfo={i % 2 == 0
+                  ? 'https://compote.slate.com/images/697b023b-64a5-49a0-8059-27b963453fb1.gif'
+                  : 'https://media.giphy.com/media/13gvXfEVlxQjDO/giphy.gif'}
+              />)
+            )} />
+        </MoviePosterRowStyle>
       </div>
     )
   }
 }
-
 
 class MovieHome extends Component {
   constructor(props) {
@@ -99,9 +99,10 @@ class MovieHome extends Component {
       sliderLink: null,
       slideList: [],
       movieList: [],
-      isLoading:true,
-      scrollIdx:3
+      isLoading:false,
+      scrollIdx:4
     }
+    this.debouncedHandleScroll = debounce(this.testDebounceScroll, 300)
   }
 
   componentWillUnmount() {
@@ -112,8 +113,15 @@ class MovieHome extends Component {
    componentDidMount() {
 
     const main = this;
-    GetSlideData().then(axios.spread(function (mainSlideList, week, populal, rating, genre) {
-      main.setState((prevState, prevProps) => ({
+    // ['/main/slide',
+    // '?sort_by=download_count',
+    // '?sort_by=like_count',
+    // '?sort_by=rating',
+    // '?genre=family',]
+
+    GetSlideData()
+    .then(axios.spread(function (mainSlideList, week, populal, rating, genre) {
+      main.setState((prevState) => ({
         slideList: prevState.slideList.concat(mainSlideList.data.data.movies),
         movieList: prevState.movieList.concat(
           [{
@@ -133,8 +141,7 @@ class MovieHome extends Component {
           }]),
       }));
    }))
-
-      window.addEventListener("scroll", this.handleScroll);
+      window.addEventListener("scroll", this.debouncedHandleScroll);
   }
 
   componentDidUpdate(){
@@ -144,7 +151,7 @@ class MovieHome extends Component {
     // })
   }
 
-  handleScroll = () => {
+  testDebounceScroll = () =>{
     // mainTitleArr.length;
     const main = this;
     const { innerHeight } = window;
@@ -155,33 +162,33 @@ class MovieHome extends Component {
     if (scrollHeight - innerHeight - scrollTop < 100) {
       console.log("Almost Bottom Of This Browser");
       // if (!this.props.isLoading && !this.props.isLast) {
-        console.log(mainTitleArr.length );
-        console.log(this.state.scrollIdx);
-        
-        if(mainTitleArr.length > this.state.scrollIdx){
-          console.log('scroll');
+        if(MainMovieListArr.length > this.state.scrollIdx){
           if (!this.state.isLoading ) {
-            axios.get(`http://localhost:5000/movie?sort_by=download_count&page=${main.state.scrollIdx}`)
-            .then((val) =>{
+            let movieListInfo1 = MainMovieListArr[main.state.scrollIdx];
+            let movieListInfo2= MainMovieListArr[main.state.scrollIdx+1];
+            getMovieListData(movieListInfo1.query)
+            axios.all([getMovieListData(movieListInfo1.query),getMovieListData(movieListInfo2.query)])
+            .then((response) =>{
               this.setState((prevState, prevProps) => ({
-                isLoading:true,
-                scrollIdx:prevState.scrollIdx +1,
+                isLoading:false,
                 movieList: prevState.movieList.concat(
                   [{
-                    category: mainTitleArr[main.state.scrollIdx],
-                    movies: val.data.data.movies
+                    category: movieListInfo1.title,
+                    movies: response[0].data.data.movies
+                  },
+                  {
+                    category: movieListInfo2.title,
+                    movies: response[1].data.data.movies
                   }]),
-                  
+                scrollIdx:prevState.scrollIdx +2,
               }));
-            })
 
+            })
         }
         }else{
           console.log('end');
         }
-
     }
-
   }
   changeSliderIndex = (index) => {
     // this.setState({
@@ -190,7 +197,6 @@ class MovieHome extends Component {
   }
 
   render() {
-    const props = this.props;
     const movieList = this.state.movieList.map((list, i) => {
       return <MoviePosterRow 
       key={i} 
@@ -202,8 +208,8 @@ class MovieHome extends Component {
     const slideList = this.state.slideList.map((list, i) => (
       <Link to={list.link} key={i}  className="custom_slide__box">
         <h2 className="custom_slide__title">{list.title}</h2>
-        <h2 className="custom_slide__summary">{list.summary}</h2>
-        <h3 style={list.style} className="custom_slide"></h3>
+        <div className="custom_slide__summary">{list.summary}</div>
+        <div style={list.style} className="custom_slide"></div>
       </Link>
     ));
 

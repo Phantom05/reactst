@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import {Icon} from 'antd';
-
+import debounce from 'lodash/debounce';
 
 const Poster = styled.div`
 .movie__poster_box_control:after {
@@ -18,11 +18,24 @@ const Poster = styled.div`
   padding: 8px;
   transition: .3s;
   cursor: pointer;
+  /* opacity:0; */
+  /* animation:showPoster 1s forwards */
+}
+@keyframes showPoster {
+  0%{
+    opacity:0
+  }
+  100%{
+    opacity:1
+  }
 }
 
 .movie__poster_img {
   width: 100%;
   /* height: 385px; */
+  &.test{
+    height: 380px;
+  }
 }
 
 .movie__poster_img_box{
@@ -138,22 +151,40 @@ const Poster = styled.div`
 
 class MoviePoster extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    this.state = {}
+    this.onDebounceHandle = debounce(this.handleMouseOver, 100)
   }
+
+  handleMouseOver = () => {
+    console.log('동작 over');
+    this.setState({
+      video: this.props.videoInfo
+    })
+  }
+
+  handleMouseLeave = () => {
+    this.setState({
+      video: false
+    })
+  }
+
   render() {
-    const props = this.props;
+    const [props, state] = [this.props, this.state];
     const { synopsis, year, title, medium_cover_image } = props.movieInfo;
     return (
       <Link to={props.link}>
         <Poster >
-          <div className="movie__poster_box" onClick={props.onClick}>
+          <div className="movie__poster_box" onMouseLeave={this.handleMouseLeave} onMouseOver={this.handleMouseOver} onClick={props.onClick}>
             <div className="movie__poster_img_box">
               <div className="movie__poster_img_dim">
                 <span className="movie__play_btn">
                   <Icon type="play-circle" theme="filled" />
                 </span>
               </div>
-              <img className="movie__poster_img" src={`https://yts.tl/${medium_cover_image}`} alt="" />
+              {state.video
+                ? <img src={state.video} className="movie__poster_img test" alt="" />
+                : <img className="movie__poster_img" src={`https://yts.tl/${medium_cover_image}`} alt="" />}
               <div className="movie__poster_img_sumnail">
                 <span className="movie__poster_img_sumnail_tx">Add to Queue</span>
               </div>

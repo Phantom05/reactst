@@ -35,6 +35,7 @@ function SamplePrevArrow(props) {
 class SlickSlider extends Component {
   constructor(props) {
     super(props);
+    this.state={}
   }
 
   render() {

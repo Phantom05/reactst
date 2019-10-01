@@ -48,21 +48,22 @@ const SlickNextArrow = styled(SampleNextArrow)`
 class SliderSlick extends Component {
   constructor(props) {
     super(props);
+    this.state={}
   }
   render() {
     const props = this.props;
 
     let config = {
-      speed          : props.config && props.config.speed || 500,
-      slidesToShow   : props.config && props.config.slidesToShow || 6,
-      slidesToScroll : props.config && props.config.slidesToScroll || 6,
-      variableWidth  : props.config && props.config.variableWidth || false,
-      dots           : props.config && props.config.dots || false,
-      infinite       : props.config && props.config.infinite || false,
-      fade           : props.config && props.config.fade || false,
-      responsive     : props.config && props.config.responsive || false,
-      autoplay       : props.config && props.config.autoplay || false,
-      autoplaySpeed  : props.config && props.config.autoplaySpeed || false,
+      speed          : (props.config && props.config.speed) || 500,
+      slidesToShow   : (props.config && props.config.slidesToShow) || 6,
+      slidesToScroll : (props.config && props.config.slidesToScroll) || 6,
+      variableWidth  : (props.config && props.config.variableWidth) || false,
+      dots           : (props.config && props.config.dots )|| false,
+      infinite       : (props.config && props.config.infinite) || false,
+      fade           : (props.config && props.config.fade) || false,
+      responsive     : (props.config && props.config.responsive) || false,
+      autoplay       : (props.config && props.config.autoplay) || false,
+      autoplaySpeed  : (props.config && props.config.autoplaySpeed) || false,
       
     }
     

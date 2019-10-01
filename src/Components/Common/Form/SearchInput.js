@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
 import cx from 'classnames';
 
 const onInputChange = (name, e, that) => {

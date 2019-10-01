@@ -8,7 +8,7 @@ import './MovieList.css';
 const MovieImg = (props) => {
 return(
   <div className="movie__box">
-    <img className="posterImage" src={props.info.poster} />
+    <img className="posterImage" src={props.info.poster}  alt="test"/>
     <div className="movie__post_title">{props.info.title}</div>
     <div className="movie__post_sub_tx">{props.info.subTitle}</div>
   </div>
