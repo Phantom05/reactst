@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import {Icon} from 'antd';
-import debounce from 'lodash/debounce';
+// import debounce from 'lodash/debounce';
 
 const Poster = styled.div`
 .movie__poster_box_control:after {
@@ -152,15 +152,18 @@ const Poster = styled.div`
 class MoviePoster extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
-    this.onDebounceHandle = debounce(this.handleMouseOver, 100)
+    this.state = {
+      video: false
+    }
+    // this.onDebounceHandle = debounce(this.handleMouseOver, 200)
   }
 
   handleMouseOver = () => {
-    console.log('동작 over');
-    this.setState({
-      video: this.props.videoInfo
-    })
+    if(this.state.video == false){
+      this.setState({
+        video: this.props.videoInfo
+      })
+    }
   }
 
   handleMouseLeave = () => {
@@ -175,7 +178,11 @@ class MoviePoster extends Component {
     return (
       <Link to={props.link}>
         <Poster >
-          <div className="movie__poster_box" onMouseLeave={this.handleMouseLeave} onMouseOver={this.handleMouseOver} onClick={props.onClick}>
+          <div className="movie__poster_box" 
+          onMouseLeave={this.handleMouseLeave} 
+          onMouseOver={this.handleMouseOver} 
+          onClick={props.onClick}>
+
             <div className="movie__poster_img_box">
               <div className="movie__poster_img_dim">
                 <span className="movie__play_btn">

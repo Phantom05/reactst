@@ -60,6 +60,11 @@ class MoviePosterRow extends Component {
     const props = this.props;
     return (
       <div className="movie__home_row">
+        {/* <video>
+        <source src="https://yts.tl/movie/the-life-of-jesus-1997" type="video/mp4" />
+
+        </video> */}
+
         <div className="movie__home_row_title_box">
           <span className="movie__home_title_tx">{props.category}</span>
           <span className="movie__home_title_more_box">
