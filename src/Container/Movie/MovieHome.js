@@ -10,6 +10,9 @@ import { SliderSlick } from 'Components/Module/SlickSlider'
 import { MoviePoster } from 'Route/Main';
 import { _PlainButton, _genreButton, _boxButton, _gradeButton } from 'Route/Styled';
 
+// api
+import {GetSlideData}  from 'Api/Api';
+
 let mainTitleArr = [
   "Weekly Watchlist"
   , "Most Popular"
@@ -27,6 +30,30 @@ let mainTitleArr = [
   , "Sports Movies - Shows"
   , "Drama"
 ];
+
+const WhiteLoading = styled.div`
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:#202026;
+z-index:500001;
+transition:.5s;
+`;
+const LoadingIcon = ({ className }) => <Icon type="loading" className={className} />;
+const LoadingIconClass = styled(LoadingIcon)`
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+font-size:30px;
+color:#fff;
+`;
+
+const MainSlideBox = styled.div`
+position:relative;
+`
 
 class MoviePosterRow extends Component {
   constructor(props) {
@@ -63,9 +90,6 @@ class MoviePosterRow extends Component {
   }
 }
 
-const MainSlideBox = styled.div`
-position:relative;
-`
 
 class MovieHome extends Component {
   constructor(props) {
@@ -85,45 +109,39 @@ class MovieHome extends Component {
     window.removeEventListener("scroll", this.handleScroll);
   }
 
-  componentDidMount() {
-    // 초반 데이터 받아오는 부분
-    const getMainSlide = () => axios.get(`http://localhost:5000/movie/main/slide`);
-    const getMovieList1 = () => axios.get(`http://localhost:5000/movie?sort_by=download_count`);
-    const getMovieList2 = () => axios.get(`http://localhost:5000/movie?sort_by=like_count`);
-    const getMovieList3 = () => axios.get(`http://localhost:5000/movie?sort_by=rating'`);
-    const getMovieList4 = () => axios.get(`http://localhost:5000/movie?genre=family`);
+   componentDidMount() {
 
     const main = this;
-    axios.all([getMainSlide(), getMovieList1(), getMovieList2(), getMovieList3(), getMovieList4()])
-      .then(axios.spread(function (mainSlideList, week, populal, rating, genre) {
-        main.setState((prevState) => ({
-          slideList: prevState.slideList.concat(mainSlideList.data.data.movies)
-        }))
-        main.setState((prevState, prevProps) => ({
-          movieList: prevState.movieList.concat(
-            [{
-              category: 'Weekly Watchlist',
-              movies: week.data.data.movies
-            },
-            {
-              category: 'Most Pupular',
-              movies: populal.data.data.movies
-            },
-            {
-              category: 'Highest Rating',
-              movies: rating.data.data.movies
-            }, {
-              category: 'Family Movies',
-              movies: genre.data.data.movies
-            }])
-        }));
-
+    GetSlideData().then(axios.spread(function (mainSlideList, week, populal, rating, genre) {
+      main.setState((prevState, prevProps) => ({
+        slideList: prevState.slideList.concat(mainSlideList.data.data.movies),
+        movieList: prevState.movieList.concat(
+          [{
+            category: 'Weekly Watchlist',
+            movies: week.data.data.movies
+          },
+          {
+            category: 'Most Pupular',
+            movies: populal.data.data.movies
+          },
+          {
+            category: 'Highest Rating',
+            movies: rating.data.data.movies
+          }, {
+            category: 'Family Movies',
+            movies: genre.data.data.movies
+          }]),
       }));
+   }))
 
-
-
-      // 스크롤 이벤트
       window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentDidUpdate(){
+    console.log('update');
+    // this.setState({
+    //   isLoading:false
+    // })
   }
 
   handleScroll = () => {
@@ -131,43 +149,36 @@ class MovieHome extends Component {
     const main = this;
     const { innerHeight } = window;
     const { scrollHeight } = document.body;
-    // IE에서는 document.documentElement 를 사용.
     const scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
       document.body.scrollTop;
-    // 스크롤링 했을때, 브라우저의 가장 밑에서 100정도 높이가 남았을때에 실행하기위함.
     if (scrollHeight - innerHeight - scrollTop < 100) {
       console.log("Almost Bottom Of This Browser");
-
       // if (!this.props.isLoading && !this.props.isLast) {
         console.log(mainTitleArr.length );
         console.log(this.state.scrollIdx);
+        
         if(mainTitleArr.length > this.state.scrollIdx){
           console.log('scroll');
-          if (!this.props.isLoading ) {
-            this.setState((prevState) =>({
-              isLoading:false,
-              scrollIdx:prevState.scrollIdx +1
-            }))
-  
+          if (!this.state.isLoading ) {
             axios.get(`http://localhost:5000/movie?sort_by=download_count&page=${main.state.scrollIdx}`)
             .then((val) =>{
-              main.setState((prevState, prevProps) => ({
+              this.setState((prevState, prevProps) => ({
+                isLoading:true,
+                scrollIdx:prevState.scrollIdx +1,
                 movieList: prevState.movieList.concat(
                   [{
-                    category: 'Weekly Watchlist',
+                    category: mainTitleArr[main.state.scrollIdx],
                     movies: val.data.data.movies
                   }]),
-                  isLoading:true
+                  
               }));
             })
+
         }
         }else{
           console.log('end');
         }
-
-
-
 
     }
 
@@ -215,31 +226,9 @@ class MovieHome extends Component {
             , autoplaySpeed: 1000
           }} />
         </MainSlideBox>
-      
         <div className="movie__home_control">{this.state.movieList ? movieList : 'Loading...'}</div>
       </div>
     );
-
-    const WhiteLoading = styled.div`
-      position:fixed;
-      left:0;
-      top:0;
-      width:100%;
-      height:100%;
-      background:#202026;
-      z-index:500001;
-      transition:.5s;
-    `;
-    const LoadingIcon = ({ className }) => <Icon type="loading" className={className} />;
-    const LoadingIconClass = styled(LoadingIcon)`
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      font-size:30px;
-      color:#fff;
-    `;
-    
 
     return (
       <div>

@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
 import './MovieIndex.css';
-import { Route } from 'react-router-dom';
+import { Route,Switch } from 'react-router-dom';
 import {
    MovieHome
   , MovieAbout
@@ -31,6 +31,7 @@ class MovieIndex extends Component {
 
         <Row>
           <Col span={24}>
+            <Switch >
             {/* Route는 깜빡이며 이동, Link는 바로이동 */}
             <Route exact path="/" component={MovieHome} />
             <Route exact path="/movie/detail/:id" component={MovieDetail} />
@@ -38,6 +39,7 @@ class MovieIndex extends Component {
             <Route exact path="/movie/:category" component={MovieList} />
             <Route exact path="/board" component={MovieBoard} />
             <Route exact path="/login" component={MovieLogin} />
+            </Switch>
           </Col>
         </Row>
         <Row>
