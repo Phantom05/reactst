@@ -107,7 +107,7 @@ class MovieHome extends Component {
       isLoading:false,
       scrollIdx:4
     }
-    this.debouncedHandleScroll = debounce(this.testDebounceScroll, 300)
+    this.debouncedHandleScroll = debounce(this.testDebounceScroll, 500)
   }
 
   componentWillUnmount() {
@@ -125,6 +125,7 @@ class MovieHome extends Component {
     // '?genre=family',]
 
     GetSlideData()
+
     .then(axios.spread(function (mainSlideList, week, populal, rating, genre) {
       main.setState((prevState) => ({
         slideList: prevState.slideList.concat(mainSlideList.data.data.movies),

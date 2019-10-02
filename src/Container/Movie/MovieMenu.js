@@ -1,6 +1,31 @@
 import React, { Component } from 'react';
-import './MovieMenu.css';
+// import './MovieMenu.css';
 import { NavLink  } from 'react-router-dom';
+import styled from '@emotion/styled';
+
+const StyledComponent = {
+  Menu : styled.div`
+  .MovieMenuBox{
+    /* display: inline-block; */
+    padding: 15px;
+    border: 1px solid red;
+    text-align: left;
+  }
+  .MovieMenuBox:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+  .MovieMenuList{
+    cursor: pointer;
+    float: left;
+    margin-right: 10px;
+  }
+  .MovieMenuList:hover{
+   text-decoration: underline;
+  }
+  `
+}
 class MovieMenu extends Component {
    
   render() {
@@ -36,8 +61,7 @@ class MovieMenu extends Component {
       fontWeight:`bold`
     }
     return (
-      <div className="MovieMenu">
-       
+      <StyledComponent.Menu>
         <ul className="MovieMenuBox">
           {menuList.map(list=>{
             return (
@@ -47,7 +71,7 @@ class MovieMenu extends Component {
             )
           })}
         </ul>
-      </div>
+      </StyledComponent.Menu>
     );
   }
 }

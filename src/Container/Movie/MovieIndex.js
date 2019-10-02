@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import { Row, Col } from 'antd';
 import 'antd/dist/antd.css';
-import './MovieIndex.css';
 import { Route,Switch } from 'react-router-dom';
 import {
    MovieHome
