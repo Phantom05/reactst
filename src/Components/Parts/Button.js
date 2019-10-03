@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class MovieLogin extends Component {
+class Button extends Component {
   render() {
     return (
       <div>
-        MovieLogin
+        <button>ff</button>
       </div>
     );
   }
 }
 
-export default MovieLogin;
+export default Button;

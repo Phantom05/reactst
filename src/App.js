@@ -1,56 +1,31 @@
 import React from 'react';
-import './Components/Reset.css';
+// import { Helmet } from 'react-helmet';
+import './Styles/Base/Reset.css';
 // import logo from './logo.svg';
-import './App.css';
-// import StateTestMain from './Components/StateTestMain';
-// import axios from 'axios';
-import '../node_modules/react-grid-layout/css/styles.css'
-import '../node_modules/react-resizable/css/styles.css'
+// import './App.css';
+import 'react-grid-layout/css/styles.css';
+import 'react-resizable/css/styles.css';
 
+import Index from './Views/Index';
 import { BrowserRouter, withRouter } from 'react-router-dom';
-import { MovieIndex } from './Route/Main';
 
-
-
-const MovieComponent = withRouter(props => <MovieIndex {...props} />);
-
-
-// class Parent extends React.Component {
-//   state = {
-//     name: "John Doe"
-//   }
-
-//   updateName = (name) => {
-//     this.setState({ name })
-//   };
-
-//   render() {
-//     return (
-//       <div>
-//         <lable>Your Name</lable>
-//         <Input value={this.state.name} updateName={this.updateName} />
-//       </div>
-//     )
-//   }
-// }
-
-// class Input extends React.Component {
-//   handleUpdate = (e) => {
-//     this.props.updateName(e.target.value)
-//   }
-
-//   render() {
-//     return <input value={this.props.value} onChange={this.handleUpdate} />
-//   }
-// }
+const IndexComponent = withRouter(props => <Index {...props} />);
 
 function App() {
   return (
     <BrowserRouter>
+      {/* <Helmet>
+        <title>Phantom05</title>
+        <meta
+        name="description"
+        content="개발자들을 위한 취향저격 블로그 서비스. 어디서 글 쓸지 고민하지 말고 벨로그에서 시작하세요."
+        />
+      </Helmet> */}
       <div className="App">
         {/* <Parent /> */}
-        <MovieComponent />
+        {/* <MovieComponent /> */}
         {/* <DramaHome /> */}
+        <IndexComponent  />
       </div>
     </BrowserRouter>
   );

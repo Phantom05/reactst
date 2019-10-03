@@ -385,3 +385,34 @@ const ABC = styled.div`
   </button>);
   let PlainButton = _boxButton(TestButtn)
   <PlainButton theme='white' />
+
+
+  
+// class Parent extends React.Component {
+//   state = {
+//     name: "John Doe"
+//   }
+
+//   updateName = (name) => {
+//     this.setState({ name })
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <lable>Your Name</lable>
+//         <Input value={this.state.name} updateName={this.updateName} />
+//       </div>
+//     )
+//   }
+// }
+
+// class Input extends React.Component {
+//   handleUpdate = (e) => {
+//     this.props.updateName(e.target.value)
+//   }
+
+//   render() {
+//     return <input value={this.props.value} onChange={this.handleUpdate} />
+//   }
+// }

@@ -4,10 +4,10 @@ import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import _ from 'lodash';
 import { Icon } from 'antd';
-import SearchInput from "Components/Common/Form/SearchInput";
+import SearchInput from "Components/Parts/SearchInput";
 
 // style
-import { HeaderComponent } from 'Styles/Base/Header'
+import { HeaderComponent } from 'Styles/Layout/Header'
 
 
 const MainSearchInput = styled(SearchInput)`

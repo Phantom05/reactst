@@ -1,6 +1,6 @@
 // import React, { Component } from 'react';
 import axios from 'axios';
-import {apiAddress} from 'Route/Common';
+import {apiAddress} from 'CrossLoads/Main';
 
 
 async function GetSlideData(){

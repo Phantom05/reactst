@@ -8,13 +8,13 @@ import styled from '@emotion/styled';
 import {  keyframes } from '@emotion/core'
 import debounce from 'lodash/debounce';
 
-import { SliderSlick } from 'Components/Module/SlickSlider'
-import { MoviePoster } from 'Route/Main';
-import {MainMovieListArr} from 'Route/Common';
+import { SliderSlick } from 'Components/Parts/SlickSlider'
+import { MoviePoster } from 'CrossLoads/Main';
+import {MainMovieListArr} from 'CrossLoads/Common';
 // import { _PlainButton, _genreButton, _boxButton, _gradeButton } from 'Route/Styled';
 
 // api
-import {GetSlideData,getMovieListData}  from 'Api/Api';
+import {GetSlideData,getMovieListData}  from 'Lib/Api/Api';
 
 const WhiteLoading = styled.div`
 position:fixed;
@@ -85,7 +85,7 @@ class MoviePosterRow extends Component {
                 onClick={this.handleClick}
                 onMouseOver={this.onDebounceHandle}
                 // videoInfo 는 서버에 데이터를 추가할 예정입니다.
-                videoInfo={i % 2 == 0
+                videoInfo={i % 2 === 0
                   ? 'https://compote.slate.com/images/697b023b-64a5-49a0-8059-27b963453fb1.gif'
                   : 'https://media.giphy.com/media/13gvXfEVlxQjDO/giphy.gif'}
               />)
@@ -220,7 +220,7 @@ class MovieHome extends Component {
     ));
 
     const Main = () => (
-      <div>
+      <div className="movieHome__main">
         <MainSlideBox >
         <Link to="/" className="main__watch_btn">
           <span className="main__watch_btn_tx">Watch Now

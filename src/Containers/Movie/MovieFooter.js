@@ -9,7 +9,7 @@ let StyleComponent ={
   min-height: 200px;
   background: #202026;
   padding-bottom: 60px;
-  margin-top: 80px;
+  padding-top: 80px;
   padding: 0 65px;
   .testColor {
   background: #e2e2e2
